@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AYU Flight</title>
+    <link rel="stylesheet" href="/css_box/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="title">
+        <div class="logo">
+          <h2>3Team</h2>
+        </div>
+        <ul class="menu">
+          <li><a href="#guide">예약안내</a></li>
+          <li><a href="#info">운항정보</a></li>
+          <li><a href="view.html">예약조회</a></li>
+          <input type="checkbox" id="checkbox" />
+          <label for="checkbox" class="toggle">
+            <div class="bars" id="bar1"></div>
+            <div class="bars" id="bar2"></div>
+            <div class="bars" id="bar3"></div>
+          </label>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>안양대 여행상품</h2>
+      <h5>즐거운 여행이 되시길 바랍니다.</h5>
+      <section id="flight-booking">
+        <!-- 항공권 예매 폼 -->
+        <div id="flight-booking-container">
+          <div id="flight-booking">
+            <form class="booking-form">
+              <div class="booking-options">
+                <button type="button" class="trip-type" id="oneWay">편도</button>
+                <button type="button" class="trip-type active" id="roundTrip">왕복</button>
+              </div>
+              <div class="flight-details">
+                <select id="departure">
+                  <option value="목적지">목적지</option>
+                  <option value="인천">인천</option>
+                  <option value="부산">부산</option>
+                  <option value="김포">김포</option>
+                  <option value="제주">제주</option>
+                  <option value="청주">청주</option>
+                  <option value="대구">대구</option>
+                  <option value="여수">여수</option>
+                  <option value="무안">무안</option>
+                  <option value="광주">광주</option>
+                  <option value="군산">군산</option>
+                  <option value="울산">울산</option>
+                  <option value="포항">포항</option>
+                  <option value="사천">원주</option>
+                  <option value="사천">사천</option>
+                  <option value="양양">양양</option>
+                </select>
+                <button type="button" id="swap-btn" style="border: none;">⇄</button>
+                <select id="arrival">
+                  <option value="목적지">목적지</option>
+                  <option value="인천">인천</option>
+                  <option value="부산">부산</option>
+                  <option value="김포">김포</option>
+                  <option value="제주">제주</option>
+                  <option value="청주">청주</option>
+                  <option value="대구">대구</option>
+                  <option value="여수">여수</option>
+                  <option value="무안">무안</option>
+                  <option value="광주">광주</option>
+                  <option value="군산">군산</option>
+                  <option value="울산">울산</option>
+                  <option value="포항">포항</option>
+                  <option value="사천">원주</option>
+                  <option value="사천">사천</option>
+                  <option value="양양">양양</option>
+                </select>
+                <input type="date" name="departure-date" id="departure-date"/>
+                <!-- 출발 날짜 -->
+                <input type="date" name="return-date" id="return-date" />
+                <!-- 도착 날짜 -->
+                <a href="#" class="search" id="search-btn">항공권 검색</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+  <script>
+    document.getElementById("swap-btn").addEventListener("click", function () {
+      const departureSelect = document.getElementById("departure");
+      const arrivalSelect = document.getElementById("arrival");
+
+      // 현재 선택된 option 요소를 저장
+      const departureSelectedOption =
+        departureSelect.options[departureSelect.selectedIndex];
+      const arrivalSelectedOption =
+        arrivalSelect.options[arrivalSelect.selectedIndex];
+
+      // 선택된 option의 값을 교체
+      const tempValue = departureSelectedOption.value;
+      const tempText = departureSelectedOption.text;
+
+      departureSelectedOption.value = arrivalSelectedOption.value;
+      departureSelectedOption.text = arrivalSelectedOption.text;
+
+      arrivalSelectedOption.value = tempValue;
+      arrivalSelectedOption.text = tempText;
+    });
+    // 편도와 왕복 선택
+    // 편도와 왕복 버튼 클릭에 따른 이벤트 리스너 추가
+    document.getElementById("oneWay").addEventListener("click", function () {
+      setTripType("oneWay");
+    });
+    document.getElementById("roundTrip").addEventListener("click", function () {
+      setTripType("roundTrip");
+    });
+
+    // 선택된 유형에 따라 스타일 변경 및 도착 날짜 폼 표시/숨김
+    function setTripType(type) {
+      const oneWayButton = document.getElementById("oneWay");
+      const roundTripButton = document.getElementById("roundTrip");
+      const returnDateInput = document.getElementById("return-date");
+
+      if (type === "oneWay") {
+        oneWayButton.classList.add("active");
+        roundTripButton.classList.remove("active");
+        returnDateInput.style.display = "none"; // 도착 날짜 숨김
+      } else if (type === "roundTrip") {
+        roundTripButton.classList.add("active");
+        oneWayButton.classList.remove("active");
+        returnDateInput.style.display = "inline-block"; // 도착 날짜 표시
+      }
+    }
+
+    // 초기 설정: 왕복이 기본 선택되어 있으므로 도착 날짜 표시
+    document.addEventListener("DOMContentLoaded", function () {
+      setTripType("roundTrip");
+    });
+
+    document.getElementById("search-btn").addEventListener("click", function () {
+    const departure = document.getElementById("departure").value;
+    const arrival = document.getElementById("arrival").value;
+    const departureDate = document.getElementById("departure-date").value;
+    const returnDate = document.getElementById("return-date").value;
+
+    // URL 파라미터로 정보 전달
+    const url = `flight_info.html?departure=${encodeURIComponent(departure)}&arrival=${encodeURIComponent(arrival)}&departureDate=${encodeURIComponent(departureDate)}&returnDate=${encodeURIComponent(returnDate)}`;
+    window.location.href = url;
+  });
+  </script>
+</html>

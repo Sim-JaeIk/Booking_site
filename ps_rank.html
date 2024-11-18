@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AYU Flight</title>
+    <link rel="stylesheet" href="/css_box/style.css" />
+    <link rel="stylesheet" href="/css_box/ps_style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="title">
+        <div class="logo">
+          <h2>3Team</h2>
+        </div>
+        <ul class="menu">
+          <li><a href="#guide">예약안내</a></li>
+          <li><a href="#info">운항정보</a></li>
+          <li><a href="view.html">예약조회</a></li>
+          <input type="checkbox" id="checkbox" />
+          <label for="checkbox" class="toggle">
+            <div class="bars" id="bar1"></div>
+            <div class="bars" id="bar2"></div>
+            <div class="bars" id="bar3"></div>
+          </label>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="ps-page">
+        <section class="header">
+          <h1 class="title_page">항공 예약 상세 페이지</h1>
+          <hr class="line"/>
+        </section>
+      
+        <section class="info-row">
+          <!-- Ticket Type -->
+          <div class="ticket-info">
+            <span class="ticket-type">편도</span>
+            <div class="destination">
+              <span class="location">인천</span>
+              <img class="icons-travels-take" src="/picture/take-off-one.png" alt="Flight Icon" />
+              <span class="location">제주</span>
+            </div>
+            <span class="date">2024.11.23.토</span>
+            <!-- Time Info -->
+            <div class="time-info">
+              <span class="time">06:40</span>
+              <span class="time">07:50</span>
+            </div>
+            <div class="price">
+              <span class="units">₩</span>
+              <span class="money">150,000</span>
+              <span class="won">원</span>
+            </div>
+          </div>
+      
+          <!-- Passenger Info -->
+          <div class="passenger-info">
+            <div class="passenger">
+              <span class="age-group">성인</span>
+              <button class="minus">-</button>
+              <span class="count">1</span>
+              <button class="plus">+</button>
+            </div>
+            <div class="passenger">
+              <span class="age-group">아동</span>
+              <button class="minus">-</button>
+              <span class="count">0</span>
+              <button class="plus">+</button>
+            </div>
+            <div class="passenger">
+              <span class="age-group">유아</span>
+              <button class="minus">-</button>
+              <span class="count">0</span>
+              <button class="plus">+</button>
+            </div>
+          </div>
+          <div class="seat-rank">
+            <div class="seat">일반석</div>
+            <div class="seat">프리미엄 일반석</div>
+            <div class="seat">비즈니스석</div>
+            <div class="seat">일등석</div>
+          </div>
+        </section>
+      
+        <!-- Seat Rank Section -->
+        <section>
+          <div class="book_button">
+            <button class="book">예약하기</button>
+          </div>
+        </section>
+      </div>      
+  </body>
+</html>
