@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AYU Flight</title>
+    <link rel="stylesheet" href="/css_box/style.css" />
+    <link rel="stylesheet" href="/css_box/info_style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="title">
+        <div class="logo">
+          <h2>3Team</h2>
+        </div>
+        <ul class="menu">
+          <li><a href="#guide">예약안내</a></li>
+          <li><a href="#info">운항정보</a></li>
+          <li><a href="view.html">예약조회</a></li>
+          <input type="checkbox" id="checkbox" />
+          <label for="checkbox" class="toggle">
+            <div class="bars" id="bar1"></div>
+            <div class="bars" id="bar2"></div>
+            <div class="bars" id="bar3"></div>
+          </label>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>여행자 정보</h2>
+      <div class="info">
+        <div id="passenger-container">
+          <!-- 기본 탑승객 1 -->
+          <div class="passenger-block" id="passenger-1">
+            <div class="header">
+              <h2 class="passenger-title">탑승객 1</h2>
+              <div class="button-group">
+                <button class="add-button" onclick="addPassenger()">추가 +</button>
+                <button class="delete-button" onclick="deletePassenger('passenger-1')">삭제 -</button>
+                <button class="reset-button" onclick="resetPassenger('passenger-1')">초기화
+                  <img class="trash-icon" src="/picture/Trash.png" alt="Delete" />
+                </button>
+              </div>
+            </div>
+      
+            <form id="passenger-form-1" class="form-container">
+              <fieldset class="form-group">
+                <legend>이름</legend>
+                <input id="full-name-1" class="form-input" placeholder="Full Name" type="text" />
+              </fieldset>
+              <fieldset class="form-group">
+                <legend>성별</legend>
+                <select id="gender-1" class="form-input">
+                  <option value="" disabled selected>성별 선택</option>
+                  <option value="male">남자</option>
+                  <option value="female">여자</option>
+                </select>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend>생년월일</legend>
+                <input id="birthday-1" class="form-input" placeholder="YYYY.MM.DD" type="text" />
+              </fieldset>
+              <fieldset class="form-group">
+                <legend>전화번호</legend>
+                <input id="phone-number-1" class="form-input" placeholder="000-0000-0000" type="text" />
+              </fieldset>
+              <fieldset class="form-group full-width">
+                <legend>이메일</legend>
+                <input id="email-1" class="form-input" placeholder="Email Address" type="email" />
+              </fieldset>
+              <!-- 경고 문구 -->
+            </form>
+          </div>
+        </div>
+        <div class="warning">
+          <p>
+            이름을 포함한 탑승객의 모든 정보는 신분증 정보와 일치해야 합니다.<br />
+            신분증 상의 정보와 다른 경우 탑승이 불가하며, 예약 확정 후에는 정보 변경이 불가합니다.
+          </p>
+        </div>
+      </div>
+      
+      <script>
+        let passengerCount = 1; // 초기 탑승객 수
+      
+        // "초기화" 버튼: 특정 탑승객의 입력값 초기화
+        function resetPassenger(id) {
+          const form = document.querySelector(`#${id} form`);
+          form.reset(); // 해당 폼의 입력값 초기화
+        }
+      
+        // "추가" 버튼: 새로운 탑승객 입력 폼 추가
+        function addPassenger() {
+          passengerCount++; // 탑승객 수 증가
+      
+          const container = document.getElementById("passenger-container");
+          const newPassenger = document.createElement("div");
+          newPassenger.className = "passenger-block";
+          newPassenger.id = `passenger-${passengerCount}`; // 고유 ID 부여
+      
+          // 새 탑승객 폼의 HTML
+          newPassenger.innerHTML = `
+            <div class="header">
+              <h2 class="passenger-title">탑승객 ${passengerCount}</h2>
+              <div class="button-group">
+                <button class="add-button" onclick="addPassenger()">추가 +</button>
+                <button class="delete-button" onclick="deletePassenger('passenger-${passengerCount}')">삭제 -</button>
+                <button class="reset-button" onclick="resetPassenger('passenger-${passengerCount}')">초기화
+                  <img class="trash-icon" src="/picture/Trash.png" alt="Delete" />
+                </button>
+              </div>
+            </div>
+      
+            <form id="passenger-form-${passengerCount}" class="form-container">
+              <fieldset class="form-group">
+                <legend>이름</legend>
+                <input id="full-name-${passengerCount}" class="form-input" placeholder="Full Name" type="text" />
+              </fieldset>
+              <fieldset class="form-group">
+                <legend>성별</legend>
+                <select id="gender-${passengerCount}" class="form-input">
+                  <option value="" disabled selected>성별 선택</option>
+                  <option value="male">남자</option>
+                  <option value="female">여자</option>
+                </select>
+              </fieldset>
+              <fieldset class="form-group">
+                <legend>생년월일</legend>
+                <input id="birthday-${passengerCount}" class="form-input" placeholder="YYYY.MM.DD" type="text" />
+              </fieldset>
+              <fieldset class="form-group">
+                <legend>전화번호</legend>
+                <input id="phone-number-${passengerCount}" class="form-input" placeholder="000-0000-0000" type="text" />
+              </fieldset>
+              <fieldset class="form-group full-width">
+                <legend>이메일</legend>
+                <input id="email-${passengerCount}" class="form-input" placeholder="Email Address" type="email" />
+              </fieldset>
+              </form>
+              <!-- 경고 문구 -->
+              <div class="warning">
+                <p>
+                  이름을 포함한 탑승객의 모든 정보는 신분증 정보와 일치해야 합니다.<br />
+                  신분증 상의 정보와 다른 경우 탑승이 불가하며, 예약 확정 후에는 정보 변경이 불가합니다.
+                </p>
+              </div>
+          `;
+      
+          // 기존 경고문 제거
+          const warnings = document.querySelectorAll(".warning");
+          warnings.forEach((warning) => (warning.style.display = "none"));
+      
+          container.appendChild(newPassenger); // 새로운 탑승객 블록 추가
+        }
+      
+        // "삭제" 버튼: 특정 탑승객의 입력 폼 삭제 (최소 1개는 유지)
+        function deletePassenger(id) {
+          const passengerBlocks = document.querySelectorAll(".passenger-block");
+          if (passengerBlocks.length > 1) {
+            const passengerBlock = document.getElementById(id);
+            if (passengerBlock) {
+              passengerBlock.remove(); // 해당 블록 삭제
+              reorderPassengers(); // 순서 재정렬
+            }
+          } else {
+            alert("최소 하나의 입력창은 유지해야 합니다."); // 최소 입력창 유지 알림
+          }
+      
+          // 마지막 블록에 경고문 표시
+          const remainingPassengers = document.querySelectorAll(".passenger-block");
+          const lastWarning = remainingPassengers[remainingPassengers.length - 1].querySelector(".warning");
+          if (lastWarning) lastWarning.style.display = "block";
+        }
+      
+        // 남은 탑승객 입력 폼들의 순서를 재정렬
+        function reorderPassengers() {
+          const passengerBlocks = document.querySelectorAll(".passenger-block");
+          passengerCount = passengerBlocks.length; // 현재 탑승객 수 업데이트
+      
+          passengerBlocks.forEach((block, index) => {
+            const newNumber = index + 1; // 새 순서
+            block.id = `passenger-${newNumber}`; // ID 업데이트
+            const title = block.querySelector(".passenger-title");
+            title.textContent = `탑승객 ${newNumber}`; // 제목 업데이트
+      
+            // 버튼들의 함수 호출에 맞게 ID 갱신
+            const resetButton = block.querySelector(".reset-button");
+            resetButton.setAttribute("onclick", `resetPassenger('passenger-${newNumber}')`);
+      
+            const deleteButton = block.querySelector(".delete-button");
+            deleteButton.setAttribute("onclick", `deletePassenger('passenger-${newNumber}')`);
+          });
+        }
+      </script>
+      
+    </main>
+  </body>
+</html>
